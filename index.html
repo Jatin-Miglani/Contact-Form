@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+        <div class="container">
+        <h1 class="main_heading">Payment Form</h1>
+        <i><p>Required Fields are followed by *</p></i>
+        <h2>Contact Information</h2> <hr>
+        <p>Name: *<input type="text" name="name" id="name" required placeholder="Jatin Miglani"></p>
+        <p>Gender *
+            <select name="gender" id="gender" required>
+                <option value="">__Select your Gender__</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Other</option>
+            </select>
+        </p>
+            <p>Address:- <textarea name="address" id="address" cols="100" rows="9" placeholder="Enter your Address"></textarea></p>
+            <p>Email:- *<input type="email" name="email" id="email" required placeholder="abc@gmail.com"></p>
+            <p>Pincode:- *<input type="number" name="pincode" id="pincode" required placeholder="123456"></p>
+            <hr>
+            <h2>Payment Information</h2>
+            <p>
+                Card Type:- *
+                <select name="card_type" id="card_type" required>
+                <option value="">__Select a Card Type__</option>
+                <option value="Visa">Visa</option>
+                <option value="Rupay">Rupay</option>
+                <option value="Master_Card">Master Card</option>
+            </select>
+            </p>
+            <p>
+                Card Number:- *<input type="number" name="card_number" id="card_number" required placeholder="1111-2222-3333-4444">
+            </p>
+            <p>
+                Expiration Date:- *<input type="date" name="expirationdate" id="expirationdate" required>
+            </p>
+            <p>CVV *<input type="password" name="cvv" id="cvv" required placeholder="1234567"></p>
+            <button onclick="send()">Submit</button>
+            <input type="reset" value="reset">
+        </div>
+
+        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase.js"></script>
+        <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+        apiKey: "f",
+        authDomain: "project1-d8deb.firebaseapp.com",
+        projectId: "project1-d8deb",
+        storageBucket: "project1-d8deb.appspot.com",
+        messagingSenderId: "348955667736",
+        appId: "1:348955667736:web:8e8b2c90bc37d0cd27026d",
+        measurementId: "G-R3XQCE8S26"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        </script> 
+
+        <script>
+            var db = firebase.database();
+            function send(){
+                var Naam = document.getElementById("name").value;
+                var Sex = document.getElementById("gender").value;
+                var Pata = document.getElementById("address").value;
+                var Code = document.getElementById("pincode").value;
+                var Card = document.getElementById("card_type").value;
+                var Number = document.getElementById("card_number").value;
+                var ExpDate = document.getElementById("expirationdate").value;
+                var Cvv = document.getElementById("cvv").value;
+                var Mail = document.getElementById("email").value;
+
+                db.ref(Naam).set({
+                    Name : Naam,
+                    Gender : Sex,
+                    Address : Pata,
+                    Pincode : Code,
+                    Card_Type : Card,
+                    Card_Number : Number,
+                    Expiration_date : ExpDate,
+                    CVV : Cvv,
+                    Email : Mail
+
+                })
+            }
+        </script>
+
+
+    
+</body>
+</html>
